@@ -102,7 +102,6 @@ export default function OperationModal({
           },
         }
       );
-      console.log(fetchTreeById, "IDD");
       fetchTreeById?.(params.id as string);
       router?.refresh();
       onClose?.();
