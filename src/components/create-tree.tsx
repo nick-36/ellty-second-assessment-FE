@@ -48,7 +48,7 @@ const CreateTree = () => {
 
   async function onSubmit(values: z.infer<typeof TreeValidation>) {
     try {
-      const token = Cookies.get("token");
+      const token = Cookies.get("jwt");
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees`,

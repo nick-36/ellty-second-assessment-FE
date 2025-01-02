@@ -15,7 +15,6 @@ export default async function middleware(req: NextRequest) {
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !accessToken) {
-    console.log("COOKIES", accessToken);
     return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
   }
 

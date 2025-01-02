@@ -88,7 +88,7 @@ export default function OperationModal({
 
   const onSubmit = async (values: z.infer<typeof OperationValidation>) => {
     try {
-      const token = Cookies.get("token");
+      const token = Cookies.get("jwt");
 
       await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees/${params.id}/operations`,

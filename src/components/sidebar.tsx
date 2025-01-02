@@ -22,7 +22,6 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     Cookies.remove("jwt");
 
     router.push("/sign-in");

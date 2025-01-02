@@ -51,8 +51,10 @@ const TreeNode = ({
               <span className="text-gray-400">=</span>
             </>
           )}
-          <div className="rounded-full bg-primary-500 p-3 h-10 w-10 flex items-center justify-center">
-            <span className="text-light-1">{operation.result}</span>
+          <div className="rounded-lg bg-primary-500 min-w-[50px] h-10 px-4 flex items-center justify-center">
+            <span className="text-light-1 text-base font-medium">
+              {operation.result}{" "}
+            </span>
           </div>
         </div>
 

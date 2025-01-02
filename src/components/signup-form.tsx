@@ -26,12 +26,15 @@ import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { ImSpinner } from "react-icons/im";
+import { useTransition } from "react";
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
+  const [loading, startTransition] = useTransition();
   const formSchema = z.object({
     username: z
       .string({
@@ -148,15 +151,27 @@ export function SignUpForm({
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="****" {...field} />
+                          <Input
+                            type="password"
+                            placeholder="****"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-                <Button type="submit" className="w-full">
-                  Sign Up
+                <Button
+                disabled={loading}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    startTransition(() => onSubmit(form.getValues()));
+                  }}
+                  type="submit"
+                  className="w-full"
+                >
+                  Sign Up {loading && <ImSpinner className="animate-spin" />}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">

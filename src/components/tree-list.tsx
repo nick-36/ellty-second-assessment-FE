@@ -22,8 +22,10 @@ function TreeCard({ tree }: { tree: Tree }) {
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="rounded-full bg-primary-500 p-4 h-10 w-10 flex items-center justify-center">
-              <span className="text-light-1">{tree.startingNumber}</span>
+            <div className="rounded-lg bg-primary-500 min-w-[100px] h-10 px-4 flex items-center justify-center">
+              <span className="text-light-1 text-base font-medium">
+                {tree.startingNumber}
+              </span>
             </div>
             <span className="text-light-1">{tree.user.username}</span>
           </div>
