@@ -109,7 +109,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
           fetchTreeById={fetchTreeById}
           parentOperation={{
             id: null,
-            result: tree?.startingNumber,
+            result: tree?.startingNumber as number,
           }}
         />
       </div>
