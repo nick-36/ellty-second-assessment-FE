@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/create-thread", "/tree/:path*"];
+const protectedRoutes = ["/create-thread", "/tree/(.*)"];
 const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function middleware(req: NextRequest) {
@@ -19,11 +19,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
-  if (
-    isPublicRoute &&
-    // session?.userId &&
-    !req.nextUrl.pathname.startsWith("/")
-  ) {
+  if (isPublicRoute && !accessToken && !req.nextUrl.pathname.startsWith("/")) {
     return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 
@@ -32,5 +28,5 @@ export default async function middleware(req: NextRequest) {
 
 // Routes Middleware should not run on
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  // matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

@@ -8,6 +8,7 @@ import OperationModal from "@/components/operation-modal";
 import { Operation, Tree } from "@/lib/types";
 import Cookies from "js-cookie";
 import { ImSpinner } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 export default function TreePage({ params }: { params: Promise<any> }) {
   const { id }: { id: string } = use(params);
@@ -16,11 +17,16 @@ export default function TreePage({ params }: { params: Promise<any> }) {
   const [tree, setTree] = useState<Tree | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRootModalOpen, setIsRootModalOpen] = useState(false);
+  const router = useRouter();
+  const token = Cookies.get("jwt");
+
+  if (!token) {
+    router.push("/sign-in");
+  }
 
   async function fetchTreeById(id: string) {
     setIsLoading(true);
     try {
-      const token = Cookies.get("jwt");
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees/${id}`,
         {
@@ -32,7 +38,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
 
       setTree(response.data);
     } catch (error: any) {
-      return null;
+      console.log(error);
     }
     setIsLoading(false);
   }
@@ -53,7 +59,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
     );
   }
 
-  if (!tree) {
+  if (!tree && token) {
     throw new Error("Tree not found");
   }
 
@@ -64,7 +70,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
           <div className="flex items-center gap-4">
             <div className="rounded-lg bg-primary-500 min-w-[100px] h-10 px-4 flex items-center justify-center">
               <span className="text-light-1 text-base font-medium">
-                {tree.startingNumber}
+                {tree?.startingNumber}
               </span>
             </div>
             <span className="text-light-1">{tree?.user?.username}</span>
