@@ -51,7 +51,7 @@ const CreateTree = () => {
       const token = Cookies.get("token");
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees`,
         {
           startingNumber: values.startingNumber,
         },

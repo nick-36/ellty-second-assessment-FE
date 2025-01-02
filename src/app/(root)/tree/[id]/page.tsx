@@ -22,7 +22,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
     try {
       const token = Cookies.get("jwt");
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees/${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

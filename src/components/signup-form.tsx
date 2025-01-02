@@ -63,7 +63,7 @@ export function SignUpForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/auth/sign-up`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/auth/sign-up`,
         {
           username: values.username,
           email: values.email,

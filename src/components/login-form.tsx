@@ -54,7 +54,7 @@ export function LoginForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/auth/login`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/auth/login`,
         {
           email: values.email,
           password: values.password,

@@ -91,7 +91,7 @@ export default function OperationModal({
       const token = Cookies.get("token");
 
       await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees/${params.id}/operations`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/trees/${params.id}/operations`,
         {
           ...values,
           parentOperationId: parentOperation?.id,
