@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ImSpinner } from "react-icons/im";
+import Cookies from "js-cookie";
 
 const TreeValidation = z.object({
   startingNumber: z.number().or(
@@ -47,7 +48,7 @@ const CreateTree = () => {
 
   async function onSubmit(values: z.infer<typeof TreeValidation>) {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees`,

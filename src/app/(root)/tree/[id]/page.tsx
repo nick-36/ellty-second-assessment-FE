@@ -7,7 +7,6 @@ import Image from "next/image";
 import OperationModal from "@/components/operation-modal";
 import { Operation, Tree } from "@/lib/types";
 import Cookies from "js-cookie";
-import { redirect } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
 
 export default function TreePage({ params }: { params: Promise<any> }) {
@@ -21,7 +20,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
   async function fetchTreeById(id: string) {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("jwt");
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees/${id}`,
         {

@@ -25,6 +25,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export function SignUpForm({
   className,
@@ -71,17 +72,14 @@ export function SignUpForm({
       );
 
       if (response.data.status === "success") {
-        // Store tokens
-        localStorage.setItem("token", response.data.token);
-
-        // Show success message
+        Cookies.set("jwt", response.data.token, {
+          path: "/",
+        });
         toast({
           title: "Account created successfully",
           description: "Welcome to the application!",
           variant: "default",
         });
-
-        // Redirect to dashboard
         router.push("/");
       }
     } catch (error: any) {

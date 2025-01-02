@@ -24,6 +24,7 @@ import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 import { ImSpinner } from "react-icons/im";
+import Cookies from "js-cookie";
 
 const OperationSchema = z.object({
   type: z.enum(["ADD", "SUBTRACT", "MULTIPLY", "DIVIDE"]),
@@ -87,7 +88,7 @@ export default function OperationModal({
 
   const onSubmit = async (values: z.infer<typeof OperationValidation>) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
 
       await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_DEV}/trees/${params.id}/operations`,
