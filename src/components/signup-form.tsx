@@ -98,9 +98,9 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email below to create new account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -163,7 +163,7 @@ export function SignUpForm({
                   />
                 </div>
                 <Button
-                disabled={loading}
+                  disabled={loading}
                   onClick={(e) => {
                     e.preventDefault();
                     startTransition(() => onSubmit(form.getValues()));
