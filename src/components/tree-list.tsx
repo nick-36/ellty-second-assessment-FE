@@ -32,7 +32,7 @@ function TreeCard({ tree }: { tree: Tree }) {
 
           <span className="text-gray-500">
             {tree.operations.length}{" "}
-            {tree.operations.length === 1 ? "operation" : "operations"}
+            {tree.operations.length === 1 ? "comment" : "comments"}
           </span>
         </div>
 

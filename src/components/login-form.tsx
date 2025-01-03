@@ -64,19 +64,24 @@ export function LoginForm({
           password: values.password,
         }
       );
-
       if (response.data.status === "success") {
         Cookies.set("jwt", response.data.token, {
           path: "/",
         });
 
         toast({
-          title: "Account created successfully",
+          title: "Logged In successfully",
           description: "Welcome to the application!",
           variant: "default",
         });
 
         router.push("/");
+      } else {
+        toast({
+          title: "Error",
+          description: response?.data?.message || "Something went wrong",
+          variant: "destructive",
+        });
       }
     } catch (error: any) {
       toast({

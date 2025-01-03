@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Sidebar from "@/components/sidebar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "500"] });
 
 export const metadata: Metadata = {
   title: "Ellty Assessment",
@@ -26,9 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.className}`}>
         <main className="flex flex-row">
           <Sidebar />
           <section className="main-container">
@@ -40,5 +30,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

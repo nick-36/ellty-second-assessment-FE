@@ -38,12 +38,15 @@ const TreeNode = ({
   };
 
   return (
-    <div className="ml-8 border-l-2 border-gray-700 pl-4">
+    <div className="ml-8 border-l-2 border-gray-700 pl-4 relative">
+      <div className="absolute left-0 top-6 w-4 h-[2px] bg-gray-700/50" />
       <div className="flex items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
           {!isRoot && (
             <>
-              <span className="text-gray-400">{parentNumber}</span>
+              <span className="text-gray-400 opacity-40 ml-1">
+                {parentNumber}
+              </span>
               <span className="text-gray-400">
                 {getOperationSymbol(operation.type)}
               </span>
@@ -51,7 +54,7 @@ const TreeNode = ({
               <span className="text-gray-400">=</span>
             </>
           )}
-          <div className="rounded-lg bg-primary-500 min-w-[50px] h-10 px-4 flex items-center justify-center">
+          <div className="rounded-lg bg-primary-500 min-w-[50px] h-10 px-4 flex items-center justify-center ml-2">
             <span className="text-light-1 text-base font-medium">
               {operation.result}{" "}
             </span>
