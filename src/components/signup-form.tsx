@@ -27,14 +27,14 @@ import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { ImSpinner } from "react-icons/im";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
-  const [loading, startTransition] = useTransition();
+  const [loading, setLoading] = useState(false);
   const formSchema = z.object({
     username: z
       .string({
@@ -65,6 +65,7 @@ export function SignUpForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL_PROD}/auth/sign-up`,
         {
@@ -91,6 +92,8 @@ export function SignUpForm({
         description: error.response?.data?.message || "Something went wrong",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -162,15 +165,7 @@ export function SignUpForm({
                     )}
                   />
                 </div>
-                <Button
-                  disabled={loading}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    startTransition(() => onSubmit(form.getValues()));
-                  }}
-                  type="submit"
-                  className="w-full"
-                >
+                <Button disabled={loading} type="submit" className="w-full">
                   Sign Up {loading && <ImSpinner className="animate-spin" />}
                 </Button>
               </div>
