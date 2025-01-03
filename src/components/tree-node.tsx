@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import OperationModal from "./operation-modal";
-import { Operation } from "@/lib/types";
+import { Operation, Role } from "@/lib/types";
+import { useUser } from "@/app/ctx/userContext";
 
 interface TreeNodeProps {
   operation: Operation;
@@ -21,6 +22,7 @@ const TreeNode = ({
   fetchTreeById,
 }: TreeNodeProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useUser();
 
   const getOperationSymbol = (type: string) => {
     switch (type) {
@@ -36,7 +38,6 @@ const TreeNode = ({
         return "";
     }
   };
-
   return (
     <div className="ml-8 border-l-2 border-gray-700 pl-4 relative">
       <div className="absolute left-0 top-6 w-4 h-[2px] bg-gray-700/50" />
@@ -65,19 +66,21 @@ const TreeNode = ({
           by {operation?.user?.username}
         </span>
 
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 text-primary-500 hover:text-primary-400"
-        >
-          <Image
-            src="/assets/reply.svg"
-            alt="reply"
-            width={20}
-            height={20}
-            className="cursor-pointer object-contain"
-          />
-          <span>Reply</span>
-        </button>
+        {user?.role === Role.REGISTERED && (
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 text-primary-500 hover:text-primary-400"
+          >
+            <Image
+              src="/assets/reply.svg"
+              alt="reply"
+              width={20}
+              height={20}
+              className="cursor-pointer object-contain"
+            />
+            <span>Reply</span>
+          </button>
+        )}
       </div>
 
       {operation.children?.map((child) => (

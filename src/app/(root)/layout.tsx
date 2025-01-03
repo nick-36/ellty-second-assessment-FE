@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Sidebar from "@/components/sidebar";
+import { UserProvider } from "../ctx/userContext";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "500"] });
 
@@ -19,13 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <main className="flex flex-row">
-          <Sidebar />
-          <section className="main-container">
-            <div className="w-full max-w-4xl">{children}</div>
-          </section>
-        </main>
-        <Toaster />
+        <UserProvider>
+          <main className="flex flex-row">
+            <Sidebar />
+            <section className="main-container">
+              <div className="w-full max-w-4xl">{children}</div>
+            </section>
+          </main>
+          <Toaster />
+        </UserProvider>
       </body>
     </html>
   );

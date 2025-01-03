@@ -20,3 +20,8 @@ export interface Tree {
   };
   operations: Operation[];
 }
+
+export enum Role {
+  UNREGISTERED = "UNREGISTERED",
+  REGISTERED = "REGISTERED",
+}

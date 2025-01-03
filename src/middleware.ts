@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/create-thread", "/tree/(.*)"];
+const protectedRoutes = ["/create-thread", "/profile", "/tree/(.*)"];
 const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function middleware(req: NextRequest) {

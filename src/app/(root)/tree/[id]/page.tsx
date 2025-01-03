@@ -5,10 +5,12 @@ import React from "react";
 import TreeNode from "@/components/tree-node";
 import Image from "next/image";
 import OperationModal from "@/components/operation-modal";
-import { Operation, Tree } from "@/lib/types";
+import { Operation, Role, Tree } from "@/lib/types";
 import Cookies from "js-cookie";
 import { ImSpinner } from "react-icons/im";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/app/ctx/userContext";
+import { FaCircleInfo } from "react-icons/fa6";
 
 export default function TreePage({ params }: { params: Promise<any> }) {
   const { id }: { id: string } = use(params);
@@ -19,6 +21,7 @@ export default function TreePage({ params }: { params: Promise<any> }) {
   const [isRootModalOpen, setIsRootModalOpen] = useState(false);
   const router = useRouter();
   const token = Cookies.get("jwt");
+  const { user } = useUser();
 
   if (!token) {
     router.push("/sign-in");
@@ -66,6 +69,14 @@ export default function TreePage({ params }: { params: Promise<any> }) {
   return (
     <section className="relative">
       <div className="bg-dark-2 p-7 rounded-xl">
+        {user?.role !== Role.REGISTERED && (
+          <div className="mb-6 p-4 rounded-lg bg-dark-3 border border-gray-700">
+            <span className="text-gray-500 flex items-center gap-2">
+              <FaCircleInfo />
+              Register to reply to threads
+            </span>
+          </div>
+        )}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             <div className="rounded-lg bg-primary-500 min-w-[100px] h-10 px-4 flex items-center justify-center">
@@ -75,20 +86,21 @@ export default function TreePage({ params }: { params: Promise<any> }) {
             </div>
             <span className="text-light-1">{tree?.user?.username}</span>
           </div>
-
-          <button
-            onClick={() => setIsRootModalOpen(true)}
-            className="flex items-center gap-2 text-primary-500 hover:text-primary-400"
-          >
-            <Image
-              src="/assets/reply.svg"
-              alt="reply"
-              width={20}
-              height={20}
-              className="cursor-pointer object-contain"
-            />
-            <span>Reply</span>
-          </button>
+          {user?.role === Role.REGISTERED && (
+            <button
+              onClick={() => setIsRootModalOpen(true)}
+              className="flex items-center gap-2 text-primary-500 hover:text-primary-400"
+            >
+              <Image
+                src="/assets/reply.svg"
+                alt="reply"
+                width={20}
+                height={20}
+                className="cursor-pointer object-contain"
+              />
+              <span>Reply</span>
+            </button>
+          )}
         </div>
 
         <div className="mt-4">
