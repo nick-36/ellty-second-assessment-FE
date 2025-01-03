@@ -119,7 +119,7 @@ export default function OperationModal({
       <DialogContent className="bg-dark-2 text-light-1 border-gray-700">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-light-1">
-            Add Operation
+            Add Reply
           </DialogTitle>
         </DialogHeader>
 
@@ -229,8 +229,7 @@ export default function OperationModal({
                 }}
                 className="w-full bg-primary-500 hover:bg-primary-600"
               >
-                Perform Operation{" "}
-                {loading && <ImSpinner className="animate-spin" />}
+                Post Reply {loading && <ImSpinner className="animate-spin" />}
               </Button>
             </form>
           </Form>
